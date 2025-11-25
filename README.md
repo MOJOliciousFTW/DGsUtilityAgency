@@ -6,6 +6,7 @@
 
 
 ## outline for calculations
+```
 Decision 1: [Enjoyment]
 ├── Option A: [Buy thing]
 │   ├── Outcome A1: [Happy]
@@ -50,3 +51,4 @@ Decision 5: [Enjoyment]
 └── Option B: [Not buy thing]
     ├── Outcome B1: [Happy]
     └── Outcome B2: [Unhappy]
+```
