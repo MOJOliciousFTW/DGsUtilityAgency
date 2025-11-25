@@ -1,4 +1,4 @@
-from textual.containers import Horizontal, Vertical
+from textual.containers import Container, Horizontal, Vertical
 from textual.screen import Screen
 from textual.widgets import (
     Button,
@@ -19,32 +19,44 @@ class LifeAreasScreen(Screen):
         yield Header()
 
         with Vertical(id="content"):
-            yield Static(
-                "[bold cyan]Step 2: Life Areas & Necessity[/bold cyan]\n\n"
-                "Tell us more about this purchase.",
-                id="life-areas-header",
-            )
-
-            yield Static("[bold]What areas of life does this affect?[/bold]")
-            yield Static("[dim]Select all that apply[/dim]")
-
-            with Vertical(id="life-areas-checkboxes"):
-                yield Checkbox("Career & Professional", id="career")
-                yield Checkbox("Personal & Social", id="personal")
-                yield Checkbox("Health & Wellness", id="health")
-
-            yield Static("[bold]How necessary is this item?[/bold]")
-            yield Static("[dim]Select one[/dim]")
-
-            with RadioSet(id="necessity"):
-                yield RadioButton("Essential - Must have", id="essential", value=True)
-                yield RadioButton(
-                    "Nice to have - Want but not critical", id="nice_to_have"
+            with Container(classes="panel"):
+                yield Static(
+                    "[bold cyan]╔═══════════════════════════════════════════════════╗[/bold cyan]\n"
+                    "[bold cyan]║[/bold cyan]  Step 2: Life Areas & Necessity                  [bold cyan]║[/bold cyan]\n"
+                    "[bold cyan]╚═══════════════════════════════════════════════════╝[/bold cyan]",
+                    classes="panel-title",
                 )
 
-            with Horizontal(id="button-group"):
-                yield Button("← Back", variant="default", id="back")
-                yield Button("Continue →", variant="primary", id="continue")
+                yield Static(
+                    "Tell us more about this purchase and its impact.",
+                    classes="hint",
+                )
+
+                with Vertical(classes="section"):
+                    yield Static("[bold]Life Areas[/bold]", classes="section-header")
+                    yield Static(
+                        "What areas of life does this affect? (Select all that apply)",
+                        classes="hint",
+                    )
+
+                    with Vertical(id="life-areas-checkboxes"):
+                        yield Checkbox("Career & Professional", id="career")
+                        yield Checkbox("Personal & Social", id="personal")
+                        yield Checkbox("Health & Wellness", id="health")
+
+                with Vertical(classes="section"):
+                    yield Static("[bold]Necessity Level[/bold]", classes="section-header")
+                    yield Static("How necessary is this item?", classes="hint")
+
+                    with RadioSet(id="necessity"):
+                        yield RadioButton("Essential - Must have", id="essential", value=True)
+                        yield RadioButton(
+                            "Nice to have - Want but not critical", id="nice_to_have"
+                        )
+
+                with Horizontal(id="button-group"):
+                    yield Button("← Back", variant="default", id="back")
+                    yield Button("Continue →", variant="primary", id="continue")
 
         yield Footer()
 

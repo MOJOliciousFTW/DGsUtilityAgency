@@ -1,5 +1,5 @@
 from textual.app import ComposeResult
-from textual.containers import Horizontal, Vertical
+from textual.containers import Container, Horizontal, Vertical
 from textual.screen import Screen
 from textual.widgets import Button, Footer, Header, Input, RadioButton, RadioSet, Static
 
@@ -9,31 +9,45 @@ class TimeAndCategoryScreen(Screen):
         yield Header()
 
         with Vertical(id="content"):
-            yield Static(
-                "[bold cyan]Step 3: Time & Category[/bold cyan]\n\n"
-                "Tell us how much time you will spend with this, how long it will last and in which category of benefit the item lands in.",
-                id="time-and-category-header",
-            )
+            with Container(classes="panel"):
+                yield Static(
+                    "[bold cyan]╔═══════════════════════════════════════════════════╗[/bold cyan]\n"
+                    "[bold cyan]║[/bold cyan]  Step 3: Time & Category                         [bold cyan]║[/bold cyan]\n"
+                    "[bold cyan]╚═══════════════════════════════════════════════════╝[/bold cyan]",
+                    classes="panel-title",
+                )
 
-            yield Static("\n[bold]How many hours per week will you use this?[/bold]")
-            yield Static("[dim]Enter the number of hours[/dim]")
-            yield Input(placeholder="e.g., 2", id="hours_pr_week", type="number")
+                yield Static(
+                    "Tell us about usage patterns and expected lifespan.",
+                    classes="hint",
+                )
 
-            yield Static("\n[bold]What is the life span of the item in months?[/bold]")
-            yield Static("[dim]Enter the expected duration[/dim]")
-            yield Input(placeholder="e.g., 14", id="life_span", type="number")
+                with Vertical(classes="section"):
+                    yield Static("[bold]Usage Time[/bold]", classes="section-header")
+                    yield Static(
+                        "How many hours per week will you use this?",
+                        classes="label"
+                    )
+                    yield Input(placeholder="e.g., 2", id="hours_pr_week", type="number")
 
-            yield Static("[bold]What category does this belong to?[/bold]")
-            yield Static("[dim]Select one[/dim]")
+                    yield Static(
+                        "What is the life span of the item in months?",
+                        classes="label"
+                    )
+                    yield Input(placeholder="e.g., 14", id="life_span", type="number")
 
-            with RadioSet(id="category"):
-                yield RadioButton("Entertainment", id="entertainment")
-                yield RadioButton("Efficiency", id="efficiency", value=True)
-                yield RadioButton("Quality of Life", id="qol")
+                with Vertical(classes="section"):
+                    yield Static("[bold]Benefit Category[/bold]", classes="section-header")
+                    yield Static("What category does this belong to?", classes="hint")
 
-            with Horizontal(id="button-group"):
-                yield Button("← Back", variant="default", id="back")
-                yield Button("Continue →", variant="primary", id="continue")
+                    with RadioSet(id="category"):
+                        yield RadioButton("Entertainment", id="entertainment")
+                        yield RadioButton("Efficiency", id="efficiency", value=True)
+                        yield RadioButton("Quality of Life", id="qol")
+
+                with Horizontal(id="button-group"):
+                    yield Button("← Back", variant="default", id="back")
+                    yield Button("Continue →", variant="primary", id="continue")
 
         yield Footer()
 
