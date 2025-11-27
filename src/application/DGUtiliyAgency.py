@@ -16,11 +16,3 @@ class DGUtilityAgency(App):
     def on_mount(self) -> None:
         self.push_screen(WelcomeScreen())
 
-
-def main():
-    app = DGUtilityAgency()
-    app.run()
-
-
-if __name__ == "__main__":
-    main()
