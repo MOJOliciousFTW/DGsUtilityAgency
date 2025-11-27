@@ -83,13 +83,15 @@ def calculate_utilities(purchase_data: PurchaseData) -> UtilityMetrics:
         income_weights["buy"] = [4, -1]
         income_weights["not_buy"] = [-8, 1]
     # Calculate use_factor (hours per dollar spent)
-    use_factor = total_time_use / price if price > 0 else 0
+    use_factor = total_time_use / price if price > 0 else 0.1
+
+    benefit_factor = benefit / price
 
     # Calculate utilities for each scenario
-    U_buy_useful = benefit * income_weights["buy"][0] - price
-    U_buy_not_useful = -price * abs(income_weights["buy"][1])
-    U_not_buy_useful = benefit * income_weights["not_buy"][0]
-    U_not_buy_not_useful = price * income_weights["not_buy"][1] * 0.1
+    U_buy_useful = benefit_factor * income_weights["buy"][0]
+    U_buy_not_useful = benefit_factor * income_weights["buy"][1]
+    U_not_buy_useful = benefit_factor * income_weights["not_buy"][0]
+    U_not_buy_not_useful = benefit_factor * income_weights["not_buy"][1]
 
     return {
         "use_factor": use_factor,
