@@ -37,7 +37,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --noconfirm --onefile \
+          uv run pyinstaller --noconfirm --onefile \
             --name DGsUtilityAgency \
             --add-data "$ADD_DATA" \
             main.py
