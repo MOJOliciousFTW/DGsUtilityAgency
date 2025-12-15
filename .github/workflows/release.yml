@@ -18,10 +18,12 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v7
         with:
-          name: DGsUtilityAgency-*
+          pattern: DGsUtilityAgency-*
+          merge-multiple: true
+          path: artifacts
 
       - name: Add assets to release
         env:
           TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
-          gh release upload "${TAG_NAME}" ./DGsUtilityAgency-*
+          gh release upload "${TAG_NAME}" artifacts/DGsUtilityAgency-*
