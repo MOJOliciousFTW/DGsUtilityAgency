@@ -19,7 +19,6 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           pattern: DGsUtilityAgency-*
-          merge-multiple: true
           path: artifacts
 
       - name: Debug
