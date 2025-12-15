@@ -26,6 +26,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
-          gh release upload "${TAG_NAME}" artifacts/DGsUtilityAgency-Windows/DGsUtilityAgency.exe
-          gh release upload "${TAG_NAME}" artifacts/DGsUtilityAgency-Linux/DGsUtilityAgency
-          gh release upload "${TAG_NAME}" artifacts/DGsUtilityAgency-macOS/DGsUtilityAgency
+          gh release upload "${TAG_NAME}" artifacts/DGsUtilityAgency-Windows/DGsUtilityAgency-Windows.exe
+          gh release upload "${TAG_NAME}" artifacts/DGsUtilityAgency-Linux/DGsUtilityAgency-Linux
+          gh release upload "${TAG_NAME}" artifacts/DGsUtilityAgency-macOS/DGsUtilityAgency-macOS
