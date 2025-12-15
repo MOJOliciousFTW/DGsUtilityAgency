@@ -19,7 +19,9 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           name: DGsUtilityAgency-*
-      
+
       - name: Add assets to release
+        env:
+          TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
-          gh release upload ${{ github.event.release.tag_name }} ./DGsUtilityAgency-*
+          gh release upload "${TAG_NAME}" ./DGsUtilityAgency-*
